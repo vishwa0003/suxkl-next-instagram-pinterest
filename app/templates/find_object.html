@@ -1,0 +1,105 @@
+{%extends 'base.html'%}
+{%block head%}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.1/min/dropzone.min.css">
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" href="../static/css/find_object.css">
+
+<link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css?family=IBM+Plex Sans&display=swap" rel="stylesheet">
+{%  endblock  %}
+
+{% block  body  %}
+
+<div class="nav_con navbar">
+    <div class="nav_title">
+      <div class="nav_body">
+  
+        <div class="nav_icon"></div>
+      </div>
+      <!-- <span  class="nav_title_text"><a href="/">Pinstgram</a> </span> -->
+      <ul>
+          <li class="title">
+            <a href="/" class="link">Pinstgram</a>
+            
+          </li>
+          <li class="subTitle">
+            <a href="/your_galary" class="link">Gallery</a>
+          </li>
+  
+          <li class="subTitle">
+            <a href="/your_object" class="link">Object</a>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+  <br/><br/><br/><br/>
+
+<div class="container">
+    <div class="numberCircle">2</div>
+    <br/><br/><br/>
+    <div>
+        <span  class="title_text">Find {{title}}</span>
+        <h1>{{rang1}}</h1>
+    </div>
+    <br/>
+
+    <div>
+        <span  class="subTitle_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse venenatis.</span>
+    </div>
+        {{object}}
+
+    <br/><br/>
+
+    <?php
+      session_start();
+      function generate_csrf_token() {
+        if(!isset($_SESSION["csrf_token"])) {
+            $token = random_bytes(64);
+            $_SESSION["csrf_token"] = $token;
+        } else {
+            $token = $_SESSION["csrf_token"];
+        }
+        return $token;
+      }
+    ?>    
+    <form   method="GET" action="/"> 
+        
+        <label class="fileUpload">
+            Finde new object
+            <input type="submit" value="Find New Object" , name="Find_New">
+        </label>
+    </form>
+    <?php
+      session_start();
+      if ($_GET["csrf_token"] != $_SESSION["csrf_token"]) {
+        unset($_SESSION["csrf_token"]);
+        die("Session authenticity invalid");
+      }
+    ?>
+    <br/>
+    <p>
+
+    
+        <img src="{{ url_for('upload_objects', filename=file) }}" style="width: 100%">
+        
+
+    </p>
+
+    
+
+</div>
+
+
+
+{% endblock  %}

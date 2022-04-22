@@ -1,0 +1,204 @@
+body, html {
+    margin: 0;
+    font-family: sans-serif;
+    background-color:rgba(242.00000077486038, 244.0000006556511, 248.0000004172325, 1);}
+
+
+.numberCircle {
+    border-radius: 50%;
+    behavior: url(PIE.htc); /* remove if you don't care about IE8 */
+    width: 28px;
+    height: 28px;
+    background: rgba(242.00000077486038, 244.0000006556511, 248.0000004172325, 1);
+    border: 2px solid #1569CE;
+    color: #1569CE;
+    text-align: center;
+    font: 22px Arial, sans-serif;
+    display: inline-block;
+    margin-top: 5%;
+}
+
+.title_text { 
+	color:rgba(18.000000827014446, 22.000000588595867, 25.000000409781933, 1);
+	width:283px;
+	height:75px;
+	font-family:Poppins;
+	text-align:left;
+	font-size:50px;
+	letter-spacing:1;
+}
+
+.subTitle_text { 
+	color:rgba(105.00000134110451, 112.000000923872, 119.00000050663948, 1);
+	height:70px;
+	font-family:IBM Plex Sans;
+	text-align:left;
+	font-size:20px;
+	letter-spacing:0;
+	line-height:px;
+}
+
+
+.fileUpload{
+    padding: 10px;
+    background: rgba(21.000000648200512, 105.00000134110451, 206.0000029206276, 1);
+    color: #fff;
+    border-radius: 5px;
+    width: 220px;
+    text-align: center;
+    font-family:Poppins;
+    font-size: 16px;
+    height: 42px;
+    
+}
+
+.findObject{
+    padding: 10px;
+    background: rgba(21.000000648200512, 105.00000134110451, 206.0000029206276, 1);
+    color: #fff;
+    border-radius: 5px;
+    width: 220px;
+    text-align: center;
+    font-family:Poppins;
+    font-size: 16px;
+    height: 42px;
+}
+
+
+
+.form-select{
+    border-radius: 5px;
+    width: 220px;
+    height: 42px;
+    font-family:Poppins;
+    font-size: 16px;
+    text-align-last: center ;
+}
+    
+    
+
+
+
+input[type="file"] {
+    display: none;
+}
+
+input[type="submit"] {
+    display: none;
+}
+
+input[type="fileUpload"] {
+    display: none;
+}
+
+input[type="custom"] {
+    display: none;
+}
+
+
+
+ul {
+    list-style-type: none;
+   
+  }
+
+
+  li {
+    float: left;
+    /* color:rgba(21.000000648200512, 105.00000134110451, 206.0000029206276, 1); */
+    /* width:118.5658950805664px;
+	height:29.953489303588867px; */
+	top:0px;
+	font-family:SF Pro Rounded;
+	text-align:left;
+	font-size:24.961238861083984px;
+	letter-spacing:3;
+    font-size: 25px;
+  }
+
+  .link{
+    color:rgba(21.000000648200512, 105.00000134110451, 206.0000029206276, 1);
+
+  }
+  
+ .subTitle{
+    color:rgba(21.000000648200512, 105.00000134110451, 206.0000029206276, 1);
+     margin-left: 40px;
+     margin-top: 5px;
+     font-size: 20px;
+ }
+
+ .title{
+    color:rgba(21.000000648200512, 105.00000134110451, 206.0000029206276, 2);
+
+ }
+
+ .nav_con { 
+	box-shadow:0px 3px 20px rgba(0, 0, 0, 0.07999999821186066);
+	background-color:rgba(255, 255, 255, 1);
+	width: 100%;
+	height:81px;
+	position:absolute;
+}
+.nav_title { 
+	width:100%;
+	height:29.953489303588867px;
+	position:absolute;
+	left:100px;
+	top:26.52325439453125px;
+}
+.nav_body { 
+	width:29.9534854888916px;
+	height:29.9534854888916px;
+	position:absolute;
+	left:0px;
+	top:0px;
+}
+.nav_icon { 
+	background-color:rgba(21.000000648200512, 105.00000134110451, 206.0000029206276, 1);
+	width:22.46511459350586px;
+	height:22.46511459350586px;
+	position:absolute;
+	top:3.74418568611145px;
+}
+.nav_title_text{ 
+	color:rgba(21.000000648200512, 105.00000134110451, 206.0000029206276, 1);
+	width:118.5658950805664px;
+	height:29.953489303588867px;
+	position:absolute;
+    margin-left: 30px;
+	top:0px;
+	font-family:SF Pro Rounded;
+	text-align:left;
+	font-size:24.961238861083984px;
+	letter-spacing:3;
+}
+
+.loader {
+    border: 16px solid #fff; /* Light grey */
+    border-top: 16px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 2s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+
+  .loadObject{
+    padding: 10px;
+    color: #fff;
+    border-radius: 5px;
+    width: 220px;
+    text-align: center;
+    font-family:Poppins;
+    font-size: 16px;
+    height: 42px;
+    visibility: hidden;
+}
+
+  

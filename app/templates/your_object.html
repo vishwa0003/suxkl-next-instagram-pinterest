@@ -1,0 +1,171 @@
+{%extends 'base.html'%}
+{%block head%}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.1/min/dropzone.min.css">
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" href="../static/css/your_galary.css">
+
+<link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=SF+Pro Rounded&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=IBM+Plex Sans&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=SF+Pro Rounded&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=SF+Pro Rounded&display=swap" rel="stylesheet">
+
+{%  endblock  %}
+
+{% block  body  %}
+
+  
+<div class="nav_con navbar">
+    <div class="nav_title">
+      <div class="nav_body">
+
+        <div class="nav_icon"></div>
+      </div>
+      <!-- <span  class="nav_title_text"><a href="/">Pinstgram</a> </span> -->
+      <ul>
+          <li class="title">
+            <a href="/" class="link">Pinstgram</a>
+            
+          </li>
+          <li class="subTitle">
+            <a href="/your_galary" class="link">Gallery</a>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+
+<div class="container">
+    <div class="marginHead">
+        <span  class="title_text">Your Objects</span>
+    </div>
+
+    <br/>
+
+    <div>
+        <span  class="subTitle_text">Let’s take a look at the objects detected in your image. Below, you can find cropped versions of your image grouped by the object detected. If you’d like to find a new object, click the button below!</span>
+    </div>
+
+    <br/><br/><br/>
+
+    <?php
+        session_start();
+        function generate_csrf_token() {
+        if(!isset($_SESSION["csrf_token"])) {
+            $token = random_bytes(64);
+            $_SESSION["csrf_token"] = $token;
+        } else {
+            $token = $_SESSION["csrf_token"];
+        }
+        return $token;
+        }
+    ?> 
+    <form   method="GET" action="/"> 
+        <label class="findObject">
+            Find New Object
+            <input type="submit" value="Find New Object" , name="Find_New">
+          </label>
+        
+    </form>
+    <?php
+        session_start();
+        if ($_GET["csrf_token"] != $_SESSION["csrf_token"]) {
+        unset($_SESSION["csrf_token"]);
+        die("Session authenticity invalid");
+        }
+    ?>
+
+    <br/>
+    <div class="row">
+    {% for key, value in obj_files.items() %}
+    
+        <div class="col-md-4 col-sm-12">
+            <!-- {{key}} -->
+            <div class="">
+                <br/><br/>
+                <div class="galleryCard">
+                    <br/>
+                    
+                        <div class="container" style="margin-left: 7px">
+                            <span  class="cardTitle">{{key}}</span>
+                        </div>
+                    
+                    <div >
+                      <div class="container">
+
+                      
+                      <div class="row">
+                        {%for file in value %}
+                        {% if loop.index == 1  %}
+                        <br/>
+                        <div class="col-6 ">
+                            <div class="gallery">
+                                <img src="{{ url_for('upload_objects', filename=file) }}"  >
+                            </div>
+                        </div>
+
+                       
+                        
+                        {% endif %}
+                        {% if loop.index == 2  %}
+                        <br/>
+                        <div class="col-6 ">
+                            <div class="gallery">
+                                <img src="{{ url_for('upload_objects', filename=file) }}"  >
+                            </div>
+                        </div>
+                        {% endif %}
+            
+                        {% if loop.index == 3  %}
+                        
+                        <div class="col-6 ">
+                            <div class="gallery">
+                                <img src="{{ url_for('upload_objects', filename=file) }}"  >
+                            </div>
+                        </div>
+                        {% endif %}
+                        
+                        {% if loop.index == 4  %}
+                        
+                        <div class="col-6 ">
+                            <div class="gallery">
+                                <img src="{{ url_for('upload_objects', filename=file) }}"  >
+                            </div>
+                        </div>
+                        {% endif %}
+
+                        {% endfor %}
+                    </div>
+                 </div>
+
+                    </div>
+                    <div class=viewCon>
+                      <div class=e2_1850>
+                        <div class=e2_1852><a href="your_object/{{key}}"  class="e2_1853">View all  →</a href="#"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+    
+    {% endfor %}
+    </div>
+
+    <br/>
+    <br/>
+    <br/>
+    
+
+</div>
+{% endblock  %}

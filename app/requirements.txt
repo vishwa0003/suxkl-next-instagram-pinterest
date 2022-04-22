@@ -1,0 +1,7 @@
+Flask
+pathlib
+Werkzeug
+torchvision
+opencv-python==4.2.0.32
+Pillow
+numpy==1.22.3

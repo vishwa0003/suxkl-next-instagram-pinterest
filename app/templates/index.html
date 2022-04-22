@@ -1,0 +1,211 @@
+  
+{%extends 'base.html'%}
+
+{%block head%}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.1/min/dropzone.min.css">
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" href="../static/css/index.css">
+
+<link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css?family=IBM+Plex Sans&display=swap" rel="stylesheet">
+
+
+
+{%  endblock  %}
+
+{% block  body  %}
+<div class="nav_con navbar">
+  <div class="nav_title">
+    <div class="nav_body">
+
+      <div class="nav_icon"></div>
+    </div>
+    <!-- <span  class="nav_title_text"><a href="/">Pinstgram</a> </span> -->
+    <ul>
+        <li class="title">
+          <a href="/" class="link">Pinstgram</a>
+          
+        </li>
+        <li class="subTitle">
+          <a href="/your_galary" class="link">Gallery</a>
+        </li>
+
+        <li class="subTitle">
+          <a href="/your_object" class="link">Object</a>
+        </li>
+        
+    </ul>
+  </div>
+</div>
+
+
+
+<br/><br/><br/><br/>
+
+<div class="container">
+  
+  <div class="numberCircle">1</div>
+  <br/><br/><br/>
+  <div>
+    <span  class="title_text">File Uploads</span>
+  </div>
+  <br/>
+
+  <div>
+    <span  class="subTitle_text">Looking for an object in your image? Upload your image below to find it! Accepted file types include: .jpeg, .jpg and .png.</span>
+  </div>
+  
+  <br/>
+  <br/>
+  <?php
+    session_start();
+    function generate_csrf_token() {
+      if(!isset($_SESSION["csrf_token"])) {
+          $token = random_bytes(64);
+          $_SESSION["csrf_token"] = $token;
+      } else {
+          $token = $_SESSION["csrf_token"];
+      }
+      return $token;
+    }
+  ?>    
+  <form method="POST" action="/" enctype="multipart/form-data" id="fileForm" >
+    
+    <label class="fileUpload">
+      Choose File
+      <input id="imageFile" type="file" name="file" accept="image/png, image/jpeg" required >
+    </label>
+    <label class="fileUpload">
+      Submit file
+      <input onclick="uploadCheck()" id="uploadFile"  type="custom">
+    </label>
+  </form>
+  <?php
+    session_start();
+    if ($_GET["csrf_token"] != $_SESSION["csrf_token"]) {
+      unset($_SESSION["csrf_token"]);
+      die("Session authenticity invalid");
+    }
+  ?>
+  <p id="submitMessage"></p>
+
+  <?php
+    session_start();
+    function generate_csrf_token() {
+      if(!isset($_SESSION["csrf_token"])) {
+          $token = random_bytes(64);
+          $_SESSION["csrf_token"] = $token;
+      } else {
+          $token = $_SESSION["csrf_token"];
+      }
+      return $token;
+    }
+  ?> 
+  <form id="fileObject" action="/find_object" method="post"> 
+        <select class="form-select" name="objects">
+          <option selected>Choose an object</option>
+            {% for object in objects_list %}
+                <option value={{object}}>{{object}}</option>
+            {%  endfor %}
+            <!-- <p><input type="submit" value="Find object" , name="submit_button"></p> -->
+            
+
+        </select>
+        <label class="findObject">
+          Find object
+          <!-- <input onclick="myFunction()" type="submit" value="Find object" name="submit_button" > -->
+          <input onclick="myFunction()" type="custom" value="Find object" name="submit_button" >
+        </label>
+        
+        <label class="loadObject" id="loading">
+          <div class="loader">
+
+          </div>
+        
+        </label>
+        
+        
+        <br/>
+        <br/>
+        <p style="font-size: 16px;">Confident level (1 - 100): <span id="rangeValue">50</span> </p> 
+
+        <input onchange="updateRange()" id="range" style="width: 40%;" type="range" min="1" max="100" name="confident_range" />
+
+  </form>
+  <?php
+    session_start();
+    if ($_GET["csrf_token"] != $_SESSION["csrf_token"]) {
+      unset($_SESSION["csrf_token"]);
+      die("Session authenticity invalid");
+    }
+  ?>
+  <p id="submitMessage2"></p>
+  
+
+  <br/>
+
+  <!-- <form method="POST" action="test">
+    <p style="font-size: 15px;">Confident level 0 - 100</p>
+
+    <input id="range" style="width: 40%;" type="range" min="0" max="100" name="name_of_slider" />
+    <input type="submit" value="submit" />
+</form> -->
+
+  <div class="row gx-5">
+    {% for file in files %}
+    <div class="col-md-6 imageCon">
+      <div class="p-3">
+        <img id="image" src="{{ url_for('upload', filename=file) }}" style="width: 100%">
+      </div>
+
+    </div>
+    
+  {%  endfor %}
+  </div>
+  
+
+  <p>
+    
+    
+</div>
+<script>
+  function myFunction() {
+    const image = document.getElementById("image");
+    if(image === null){
+      document.getElementById("submitMessage2").innerText = "Please choose a file before find object";
+    }else{
+      document.getElementById("loading").style.visibility = "visible"
+      document.getElementById("fileObject").submit();
+    }
+    
+  }
+
+  function updateRange(){
+    const range =  document.getElementById("range");
+    document.getElementById("rangeValue").innerText = range.value
+  }
+
+  function uploadCheck(){
+    const inpObj = document.getElementById("imageFile");
+    if(!inpObj.checkValidity()){
+      document.getElementById("submitMessage").innerText = "Please choose a file before submit";
+    }else{
+      document.getElementById("submitMessage").innerText = "File successfully uploaded";
+      document.getElementById("fileForm").submit();
+    }
+    
+  }
+
+  </script>
+
+
+{% endblock  %}

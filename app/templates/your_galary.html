@@ -1,0 +1,70 @@
+{%extends 'base.html'%}
+{%block head%}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.1/min/dropzone.min.css">
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" href="../static/css/your_galary.css">
+
+<link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=SF+Pro Rounded&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=IBM+Plex Sans&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=SF+Pro Rounded&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=SF+Pro Rounded&display=swap" rel="stylesheet">
+
+{%  endblock  %}
+
+{% block  body  %}
+<div class="nav_con navbar">
+    <div class="nav_title">
+      <div class="nav_body">
+
+        <div class="nav_icon"></div>
+      </div>
+      <!-- <span  class="nav_title_text"><a href="/">Pinstgram</a> </span> -->
+      <ul>
+          <li class="title">
+            <a href="/" class="link">Pinstgram</a>
+            
+          </li>
+          <li class="subTitle">
+            <a href="/your_object" class="link">Object</a>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="marginHead">
+        <span  class="title_text">Your Gallery</span>
+    </div>
+
+    <div class="photo-gallery">
+        <div class="container">
+            <div class="intro">
+              
+            </div>
+            <div class="row photos">
+                {% for file in obj_files %}
+                <div class="col-sm-6 col-md-4 col-lg-3 item">
+                 
+                  <a href="../uploads/{{file}} "  data-lightbox="photos"><img class="img-fluid imageRoun" src="../uploads/{{file}} " ></a>
+                </div>
+            
+                
+              {%  endfor %}
+            </div>
+        </div>
+      </div>
+  </div>
+
+{% endblock  %}
